@@ -40,6 +40,7 @@ const Header = () => {
 
 const Nav = ({ isActive, handleActive }: NavProps) => {
   const removeActive = () => {
+    
     handleActive();
   };
   return (
