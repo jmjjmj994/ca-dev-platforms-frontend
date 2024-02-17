@@ -6,9 +6,12 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: 'hsl(60, 1%, 90%)',
-
-        secondary: 'hsl(0, 0%, 80%)',
+        primary: 'hsl(230, 58%, 52%)',
+        secondary: 'hsl(230, 44%, 14%)',
+        background: 'hsl(0, 0%, 100%)',
+        'light-grey': '	hsl(228, 33%, 97%)',
+        'darker-grey': 'hsl(230, 48%, 90%)',
+        'very-dark-grey': 'hsl(230, 18%, 38%)',
       },
 
       width: {
