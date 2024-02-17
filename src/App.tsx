@@ -16,7 +16,7 @@ const App = () => {
       <BrowserRouter>
         <main className="router-wrapper">
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route index element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/sign-up" element={<SignUp />} />
           </Routes>
