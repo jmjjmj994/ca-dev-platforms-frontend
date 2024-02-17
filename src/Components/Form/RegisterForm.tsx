@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { createUser, UserCreationData } from '../../fetch/fetch';
+import { useEffect, useState } from 'react';
+import { createUser, UserCreationData, errorHandler } from '../../fetch/fetch';
 import { useNavigate, Form } from 'react-router-dom';
 
 const RegisterForm = () => {
@@ -15,6 +15,7 @@ const RegisterForm = () => {
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   const handleUser = ({
     id,
@@ -46,23 +47,20 @@ const RegisterForm = () => {
     let isValid = true;
     if (!user.firstName || !user.lastName || !user.email || !user.password) {
       isValid = false;
-      console.log(user);
     }
 
-    console.log('valid', isValid);
-
     if (isValid) {
-      await createUser({
-        firstName: user.firstName,
-        lastName: user.lastName,
-        email: user.email,
-        password: user.password,
-      });
-      setFirstName('');
-      setLastName('');
-      setEmail('');
-      setPassword('');
-      navigate('/');
+      try {
+        await createUser({
+          firstName: user.firstName,
+          lastName: user.lastName,
+          email: user.email,
+          password: user.password,
+        });
+      } catch (error) {
+        const err = error.message;
+        setError(err);
+      }
     }
   };
 
@@ -127,10 +125,18 @@ const RegisterForm = () => {
         />
       </div>
       <div className="flex flex-col w-full">
+        <div className=" min-h-5">
+          {error && (
+            <span className="text-sm tracking-wide  text-red-500  ">
+              {error}
+            </span>
+          )}
+        </div>
+
         <button
           onClick={async () => validate()}
           type="submit"
-          className="bg-primary border border-dark-grey py-3 pl-2 mt-5 rounded-md text-light-grey"
+          className="bg-primary border border-dark-grey py-3 pl-2 mt-10 rounded-md text-light-grey"
         >
           Register
         </button>

@@ -31,11 +31,19 @@ export interface UserCreationData {
   password: string;
 }
 
-interface UserCreationResponse {
+interface ResponseUser {
   id: string;
+  email: string;
+}
+interface ResponseSession {
   access_token: string;
-  expires_in: number;
-  refresh_token: string;
+  token_type: string;
+  expires: number;
+}
+
+interface UserCreationResponse {
+  user: ResponseUser;
+  session: ResponseSession;
 }
 
 export const createUser = async ({
@@ -46,7 +54,7 @@ export const createUser = async ({
 }: UserCreationData) => {
   const url: string = 'https://ca-dev-platforms.onrender.com/api/signup';
 
-  try {
+
     const response = await fetch(url, {
       method: 'POST',
       body: JSON.stringify({
@@ -57,30 +65,34 @@ export const createUser = async ({
       }),
       headers: { 'Content-type': 'application/json' },
     });
+    if (response.status !== 200) {
+      const error = await response.json();
+      const errorMessage: string = error.message;
+      throw error;
+    } else {
+      const { user, session }: UserCreationResponse = await response.json();
+      console.log(user.id, session);
+      localStorage.setItem(
+        'user',
+        JSON.stringify({
+          id: user.id,
+          user: user.email,
+          access_token: session.access_token,
+          token_type: session.token_type,
+          expires: session.expires,
+          loggedIn: true,
+        })
+      );
+    }
 
-    console.log(response, 'response');
-    const {
-      id,
-      access_token,
-      expires_in,
-      refresh_token,
-    }: UserCreationResponse = await response.json();
-    const data = {
-      id: id,
-      access_token: access_token,
-      expires_in: expires_in,
-      refresh: refresh_token,
-    };
-    console.log(data);
-    localStorage.setItem(
-      'user',
-      JSON.stringify({
-        access_token: data.access_token,
-        userId: data.id,
-        loggedIn: true,
-      })
-    );
-  } catch (error) {
-    console.error(error);
+};
+
+export const errorHandler = (error: unknown) => {
+  if (typeof error === 'string') {
+    return error;
+  } else if (error instanceof Error) {
+    return error.message;
   }
 };
+
+export const signIn = async () => {};
