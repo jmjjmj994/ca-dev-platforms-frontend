@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 type NavProps = {
   isActive: boolean;
@@ -72,16 +72,16 @@ const Nav = ({ isActive, handleActive }: NavProps) => {
 
         <ul className="h-full w-full  pl-5 pt-5">
           <li className="mt-5 text-xl">
-            <Link to="/">Home</Link>
+            <NavLink to="/">Home</NavLink>
           </li>
           <li className="mt-5 text-xl">
-            <Link to="/">Cars</Link>
+            <NavLink to="/">Cars</NavLink>
           </li>
           <li className="mt-5 text-xl">
-            <Link to="/">Account</Link>
+            <NavLink to="/">Account</NavLink>
           </li>
           <li className="mt-5 text-xl">
-            <Link to="/">Documentation</Link>
+            <NavLink to="/">Documentation</NavLink>
           </li>
         </ul>
       </div>

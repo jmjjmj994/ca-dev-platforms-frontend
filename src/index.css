@@ -103,3 +103,8 @@ body,
   max-width: 40rem;
   width: 90%;
 }
+
+
+nav {
+  background-color: red;
+}
