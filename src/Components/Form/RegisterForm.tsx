@@ -57,6 +57,7 @@ const RegisterForm = () => {
           email: user.email,
           password: user.password,
         });
+        navigate('/');
       } catch (error) {
         const err = error.message;
         setError(err);

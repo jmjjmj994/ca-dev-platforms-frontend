@@ -25,6 +25,7 @@ https://ca-dev-platforms.onrender.com/api/getuser
 
 */
 
+import React from 'react';
 import { json } from 'react-router-dom';
 
 export interface UserCreationData {
@@ -92,7 +93,7 @@ export interface UserLoginData {
   password: string;
 }
 
-export const signIn = async ({ email, password }) => {
+export const signIn = async ({ email, password }: UserLoginData) => {
   console.log(email, password);
   const url: string = 'https://ca-dev-platforms.onrender.com/api/login';
 
@@ -106,7 +107,7 @@ export const signIn = async ({ email, password }) => {
   });
 
   const data = await response.json();
-  console.log(data)
+  console.log(data);
   if (data.error) {
     throw new Error(data.error);
   }

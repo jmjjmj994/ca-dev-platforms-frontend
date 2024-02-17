@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { signIn, UserLoginData } from '../../fetch/fetch';
-
+import { useNavigate } from 'react-router-dom';
 const LoginForm = () => {
-  const [user, setUser]: UserLoginData = useState({
+  const navigate = useNavigate();
+  const [user, setUser] = useState<UserLoginData>({
     email: '',
     password: '',
   });
@@ -28,7 +29,6 @@ const LoginForm = () => {
     setUser((prevUser: UserLoginData) => ({ ...prevUser, [id]: value }));
   };
   const validate = async () => {
-    console.log('clicked');
     let isValid = true;
     if (!user.email || !user.password) {
       isValid = false;
@@ -37,13 +37,15 @@ const LoginForm = () => {
     if (isValid) {
       try {
         await signIn({ email: user.email, password: user.password });
+        setEmail('');
+        setPassword('');
+        navigate('/');
       } catch (error) {
         const err = error.message;
         setError(err);
       }
     }
   };
-  console.log(error);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -81,8 +83,10 @@ const LoginForm = () => {
       </div>
 
       <div className="min-h-10 flex items-center">
-        {error && (
+        {error ? (
           <span className="text-sm tracking-wide  text-red-500">{error}</span>
+        ) : (
+          ''
         )}
       </div>
 
