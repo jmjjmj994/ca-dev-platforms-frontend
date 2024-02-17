@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 
 type NavProps = {
   isActive: boolean;
@@ -39,8 +39,14 @@ const Header = () => {
 };
 
 const Nav = ({ isActive, handleActive }: NavProps) => {
+  const navigate = useNavigate();
   const removeActive = () => {
     handleActive();
+  };
+
+  const clearStorage = () => {
+    localStorage.clear();
+    navigate('/login');
   };
   return (
     <nav
@@ -82,6 +88,9 @@ const Nav = ({ isActive, handleActive }: NavProps) => {
           </li>
           <li className="mt-5 text-xl">
             <NavLink to="/">Documentation</NavLink>
+          </li>
+          <li className="mt-10 text-2xl">
+            <button onClick={() => clearStorage()}>Sign out</button>
           </li>
         </ul>
       </div>
