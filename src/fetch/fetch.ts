@@ -1,33 +1,3 @@
-/* GET
-https://ca-dev-platforms.onrender.com/api/cars
-
-POST
-
-https://ca-dev-platforms.onrender.com/api/cars
-
-PUT
-
-https://ca-dev-platforms.onrender.com/api/cars/id
-
-DELETE
-
-https://ca-dev-platforms.onrender.com/api/cars/id
-
-POST
-https://ca-dev-platforms.onrender.com/api/signup
-
-POST
-https://ca-dev-platforms.onrender.com/api/login
-
-GET
-
-https://ca-dev-platforms.onrender.com/api/getuser
-
-*/
-
-import React from 'react';
-import { json } from 'react-router-dom';
-
 export interface UserCreationData {
   firstName: string;
   lastName: string;
