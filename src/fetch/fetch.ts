@@ -16,6 +16,9 @@ https://ca-dev-platforms.onrender.com/api/cars/id
 POST
 https://ca-dev-platforms.onrender.com/api/signup
 
+POST
+https://ca-dev-platforms.onrender.com/api/login
+
 GET
 
 https://ca-dev-platforms.onrender.com/api/getuser
@@ -52,47 +55,61 @@ export const createUser = async ({
   email,
   password,
 }: UserCreationData) => {
-  const url: string = 'https://ca-dev-platforms.onrender.com/api/signup';
+  const url: string = 'https://ca-dev-platforms.onrender.com/api/register';
 
-
-    const response = await fetch(url, {
-      method: 'POST',
-      body: JSON.stringify({
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
-        password: password,
-      }),
-      headers: { 'Content-type': 'application/json' },
-    });
-    if (response.status !== 200) {
-      const error = await response.json();
-      const errorMessage: string = error.message;
-      throw error;
-    } else {
-      const { user, session }: UserCreationResponse = await response.json();
-      console.log(user.id, session);
-      localStorage.setItem(
-        'user',
-        JSON.stringify({
-          id: user.id,
-          user: user.email,
-          access_token: session.access_token,
-          token_type: session.token_type,
-          expires: session.expires,
-          loggedIn: true,
-        })
-      );
-    }
-
-};
-
-export const errorHandler = (error: unknown) => {
-  if (typeof error === 'string') {
-    return error;
-  } else if (error instanceof Error) {
-    return error.message;
+  const response = await fetch(url, {
+    method: 'POST',
+    body: JSON.stringify({
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      password: password,
+    }),
+    headers: { 'Content-Type': 'application/json' },
+  });
+  if (response.status !== 200) {
+    const error = await response.json();
+    throw error;
+  } else {
+    const { user, session }: UserCreationResponse = await response.json();
+    console.log(user.id, session);
+    localStorage.setItem(
+      'user',
+      JSON.stringify({
+        id: user.id,
+        user: user.email,
+        access_token: session.access_token,
+        token_type: session.token_type,
+        expires: session.expires,
+        loggedIn: true,
+      })
+    );
   }
 };
 
-export const signIn = async () => {};
+export interface UserLoginData {
+  email: string;
+  password: string;
+}
+
+export const signIn = async ({ email, password }) => {
+  console.log(email, password);
+  const url: string = 'https://ca-dev-platforms.onrender.com/api/login';
+
+  const response = await fetch(url, {
+    method: 'POST',
+    body: JSON.stringify({
+      email: email,
+      password: password,
+    }),
+    headers: { 'Content-Type': 'application/json' },
+  });
+
+  const data = await response.json();
+  console.log(data)
+  if (data.error) {
+    throw new Error(data.error);
+  }
+
+  localStorage.setItem('token', data.token);
+};

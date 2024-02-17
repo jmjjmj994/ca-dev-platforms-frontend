@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
-import { createUser, UserCreationData, errorHandler } from '../../fetch/fetch';
-import { useNavigate, Form } from 'react-router-dom';
+import { useState } from 'react';
+import { createUser, UserCreationData } from '../../fetch/fetch';
+import { useNavigate } from 'react-router-dom';
 
 const RegisterForm = () => {
   const navigate = useNavigate();
@@ -40,7 +40,7 @@ const RegisterForm = () => {
       default:
     }
 
-    setUser((prevUser) => ({ ...prevUser, [id]: value }));
+    setUser((prevUser: UserCreationData) => ({ ...prevUser, [id]: value }));
   };
 
   const validate = async () => {
@@ -125,14 +125,15 @@ const RegisterForm = () => {
         />
       </div>
       <div className="flex flex-col w-full">
-        <div className=" min-h-5">
+        <div className="min-h-10flex items-center">
           {error && (
             <span className="text-sm tracking-wide  text-red-500  ">
               {error}
             </span>
           )}
         </div>
-
+      </div>
+      <div className="flex flex-col w-full">
         <button
           onClick={async () => validate()}
           type="submit"
