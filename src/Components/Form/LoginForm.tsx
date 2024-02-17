@@ -82,11 +82,9 @@ const LoginForm = () => {
         />
       </div>
 
-      <div className="min-h-10 flex items-center">
-        {error ? (
+      <div className="min-h-5  w-full">
+        {error && (
           <span className="text-sm tracking-wide  text-red-500">{error}</span>
-        ) : (
-          ''
         )}
       </div>
 

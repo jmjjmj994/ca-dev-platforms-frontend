@@ -57,6 +57,11 @@ const RegisterForm = () => {
           email: user.email,
           password: user.password,
         });
+
+        setFirstName('');
+        setLastName('');
+        setEmail('');
+        setPassword('');
         navigate('/');
       } catch (error) {
         const err = error.message;
@@ -126,7 +131,7 @@ const RegisterForm = () => {
         />
       </div>
       <div className="flex flex-col w-full">
-        <div className="min-h-10flex items-center">
+        <div className="min-h-5  flex items-center">
           {error && (
             <span className="text-sm tracking-wide  text-red-500  ">
               {error}
