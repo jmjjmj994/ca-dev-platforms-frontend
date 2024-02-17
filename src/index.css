@@ -57,13 +57,19 @@ button {
   isolation: isolate;
 }
 
-html,
-body,
-#root {
+html {
   height: 100%;
+}
+body {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: 1fr;
+  min-height: 100vh;
 }
 #root {
   display: flex;
+  background-color: blue;
+  flex: 1;
 }
 .router-wrapper {
   flex: 1;
@@ -98,12 +104,16 @@ body,
   width: 90%;
   margin: 0 auto;
 }
+.main-content-wrapper {
+  max-width: 90rem;
+  width: 90%;
+  margin: 0 auto;
+}
 
 .user-form {
   max-width: 40rem;
   width: 90%;
 }
-
 
 nav {
   background-color: red;

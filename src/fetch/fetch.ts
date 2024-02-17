@@ -84,3 +84,13 @@ export const signIn = async ({ email, password }: UserLoginData) => {
 
   localStorage.setItem('token', data.token);
 };
+
+export const getAllCars = async () => {
+  const url = 'https://ca-dev-platforms.onrender.com/api/cars';
+
+  const response = await fetch(url, {
+    headers: { 'Content-Type': 'application/json' },
+  });
+  const data = await response.json();
+  return data;
+};
