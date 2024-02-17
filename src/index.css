@@ -77,17 +77,15 @@ body,
   font-family: 'Alegreya Sans SC', sans-serif;
 }
 
+.header-content-wrapper,
+.footer-content-wrapper,
+.navbar-content-wrapper {
+  height: 100%;
+}
 .header-content-wrapper {
   max-width: 90rem;
   width: 90%;
   margin: 0 auto;
-}
-
-.header-content-wrapper,
-.footer-content-wrapper,
-.navbar-content-wrapper {
-
-  height: 100%;
 }
 
 .footer-content-wrapper {
@@ -99,4 +97,9 @@ body,
   max-width: 90rem;
   width: 90%;
   margin: 0 auto;
+}
+
+.user-form {
+  max-width: 40rem;
+  width: 90%;
 }

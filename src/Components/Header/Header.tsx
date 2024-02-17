@@ -13,7 +13,7 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-primary">
+    <header className="bg-light-grey">
       <div className="header-content-wrapper  flex justify-between items-center   bg-orange-500 ">
         <span className="logo">ImperialInferno</span>
         <button onClick={handleActive} aria-label="open">
