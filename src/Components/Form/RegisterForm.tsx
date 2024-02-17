@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { createUser, UserCreationData } from '../../fetch/fetch';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, NavLink } from 'react-router-dom';
 
 const RegisterForm = () => {
   const navigate = useNavigate();
@@ -148,6 +148,12 @@ const RegisterForm = () => {
           Register
         </button>
       </div>
+      <p className="">
+        Already have an account?
+        <NavLink className={'ml-2 text-blue-500 underline'} to={'/login'}>
+          Log in
+        </NavLink>
+      </p>
     </form>
   );
 };

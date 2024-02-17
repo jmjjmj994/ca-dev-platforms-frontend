@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { signIn, UserLoginData } from '../../fetch/fetch';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, NavLink } from 'react-router-dom';
 const LoginForm = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState<UserLoginData>({
@@ -96,6 +96,13 @@ const LoginForm = () => {
           Create
         </button>
       </div>
+
+      <p className="">
+        Don´t have an account?
+        <NavLink className={'ml-2 text-blue-500 underline'} to={'/sign-up'}>
+          Register
+        </NavLink>
+      </p>
     </form>
   );
 };
