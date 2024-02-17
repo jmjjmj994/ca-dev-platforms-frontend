@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { createUser, UserCreationData } from '../../fetch/fetch';
-import { Navigate, Form} from 'react-router-dom';
+import { useNavigate, Form } from 'react-router-dom';
 
 const RegisterForm = () => {
+  const navigate = useNavigate();
   const [user, setUser] = useState<UserCreationData>({
     firstName: '',
     lastName: '',
@@ -61,6 +62,7 @@ const RegisterForm = () => {
       setLastName('');
       setEmail('');
       setPassword('');
+      navigate('/');
     }
   };
 
