@@ -9,6 +9,16 @@
   box-sizing: border-box;
 }
 
+.car-price::-webkit-outer-spin-button,
+.car-price::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.car-price {
+  -moz-appearance: textfield;
+}
+
 img,
 picture,
 video,
@@ -68,7 +78,6 @@ body {
 }
 #root {
   display: flex;
-  background-color: blue;
   flex: 1;
 }
 .router-wrapper {
@@ -111,6 +120,10 @@ body {
 }
 
 .user-form {
+  max-width: 40rem;
+  width: 90%;
+}
+.user-container {
   max-width: 40rem;
   width: 90%;
 }

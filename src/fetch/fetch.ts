@@ -64,9 +64,7 @@ export interface UserLoginData {
 }
 
 export const signIn = async ({ email, password }: UserLoginData) => {
-  console.log(email, password);
   const url: string = 'https://ca-dev-platforms.onrender.com/api/login';
-
   const response = await fetch(url, {
     method: 'POST',
     body: JSON.stringify({
@@ -82,7 +80,32 @@ export const signIn = async ({ email, password }: UserLoginData) => {
     throw new Error(data.error);
   }
 
-  localStorage.setItem('token', data.token);
+  localStorage.setItem(
+    'user',
+    JSON.stringify({
+      email: data.email,
+      token: data.token,
+      id: data.id,
+      loggedIn: true,
+    })
+  );
+};
+
+export const createCarListing = async ({ brand, color, price, img }) => {
+  const url = 'https://ca-dev-platforms.onrender.com/api/cars';
+  console.log(brand, color, price, img);
+  const response = await fetch(url, {
+    method: 'POST',
+    body: JSON.stringify({
+      brand: brand,
+      color: color,
+      price: price,
+      img: img,
+    }),
+    headers: { 'Content-Type': 'application/json' },
+  });
+  const data = await response.json();
+  return data;
 };
 
 export const getAllCars = async () => {

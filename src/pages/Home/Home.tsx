@@ -2,7 +2,8 @@ import { Helmet } from 'react-helmet-async';
 import { useEffect } from 'react';
 import Header from '../../Components/Header';
 import Footer from '../../Components/Footer';
-import Grid from '../../Components/Grid';
+import UserInterface from '../../Components/User/User';
+
 const Home = () => {
   useEffect(() => {
     document.title = 'Home';
@@ -17,8 +18,8 @@ const Home = () => {
       </Helmet>
       <Header />
       <main className="">
-        <div className="main-content-wrapper bg-blue-500 h-full">
-          <Grid />
+        <div className="main-content-wrapper h-full flex items-center justify-center">
+          <UserInterface />
         </div>
       </main>
       <Footer />

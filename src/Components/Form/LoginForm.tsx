@@ -93,7 +93,7 @@ const LoginForm = () => {
           onClick={async () => validate()}
           className="bg-primary border border-dark-grey py-3 pl-2 mt-5 rounded-md text-light-grey"
         >
-          Create
+          Log in
         </button>
       </div>
 
