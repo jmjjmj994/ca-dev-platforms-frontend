@@ -20,6 +20,7 @@ const UserInterface = () => {
   const [price, setPrice] = useState(0);
   const [img, setImage] = useState('');
   const [success, setSuccess] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleCar = ({ id, value }) => {
     switch (id) {
@@ -39,10 +40,14 @@ const UserInterface = () => {
     setCar((prevCar) => ({ ...prevCar, [id]: value }));
   };
 
+  const handleSuccess = () => {
+    return <p>{success}</p>;
+  };
   const validate = async () => {
     console.log(car);
     try {
       if (car.brand && car.color && car.price && car.img) {
+        setIsLoading(true);
         const data = await createCarListing({
           brand: car.brand,
           color: car.color,
@@ -56,6 +61,12 @@ const UserInterface = () => {
           setImage('');
           setSuccess(data.success);
           setCar({ brand: '', color: '', price: 0, img: '' });
+          setIsLoading(false);
+          setTimeout(() => {
+            setSuccess('');
+          }, 3000);
+        } else {
+          setIsLoading(false);
         }
       } else {
         console.log('Some fields are missing.');
@@ -67,6 +78,7 @@ const UserInterface = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
   };
+
   return (
     <section className="user-container bg-white px-4 py-5 rounded-md shadow-xl">
       <div className="flex w-full items-center  justify-between">
@@ -83,6 +95,7 @@ const UserInterface = () => {
           <div className="flex flex-col gap-0.5 w-full">
             <label htmlFor="brand">Brand</label>
             <input
+              required
               className="bg-light-grey border border-dark-grey py-2 pl-2 rounded-md"
               type="text"
               placeholder="Brand"
@@ -95,21 +108,29 @@ const UserInterface = () => {
           </div>
 
           <div className="flex flex-col gap-0.5 w-full">
-            <label htmlFor="color">Color</label>
-            <input
-              className="bg-light-grey border border-dark-grey py-2 pl-2 rounded-md"
-              type="text"
-              placeholder="Color"
-              id="color"
+            <label htmlFor="colors">Colors</label>
+            <select
+              className="car-price bg-light-grey border border-dark-grey py-2 pl-2 rounded-md"
               value={color}
               onChange={(event) =>
                 handleCar({ id: 'color', value: event.target.value })
               }
-            />
+              required
+              name="colors"
+              id="colors"
+            >
+              <option value=""> - Car color -</option>
+              <option value="black"> Black</option>
+              <option value="white"> White</option>
+              <option value="red"> Red</option>
+              <option value="blue"> Blue</option>
+              <option value="orange"> Orange</option>
+            </select>
           </div>
           <div className="flex flex-col gap-0.5 w-full">
             <label htmlFor="price">Price</label>
             <input
+              required
               className="car-price bg-light-grey border border-dark-grey py-2 pl-2 rounded-md"
               type="number"
               placeholder="Price"
@@ -123,6 +144,7 @@ const UserInterface = () => {
           <div className="flex flex-col gap-0.5 w-full">
             <label htmlFor="image">Image</label>
             <input
+              required
               className="bg-light-grey border border-dark-grey py-2 pl-2 rounded-md"
               type="text"
               placeholder="Image"
@@ -141,15 +163,23 @@ const UserInterface = () => {
               Create listing
             </button>
           </div>
-          <p>{success && success}</p>
+
+          {isLoading && (
+            <div className="lds-ring">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+          )}
+
+          <p> {success && handleSuccess()}</p>
         </div>
       </form>
     </section>
   );
 };
 export default UserInterface;
-
-const createListing = () => {};
 
 const UserDetails = () => {
   const [details, setDetails] = useState<LocalStorageData>({
