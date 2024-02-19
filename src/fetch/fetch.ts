@@ -110,7 +110,6 @@ export const createCarListing = async ({ brand, color, price, img }) => {
 
 export const getAllCars = async () => {
   const url = 'https://ca-dev-platforms.onrender.com/api/cars';
-
   const response = await fetch(url, {
     headers: { 'Content-Type': 'application/json' },
   });

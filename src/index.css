@@ -94,7 +94,8 @@ body {
 
 .header-content-wrapper,
 .footer-content-wrapper,
-.navbar-content-wrapper {
+.navbar-content-wrapper,
+.car-content-wrapper {
   height: 100%;
 }
 .header-content-wrapper {
@@ -113,12 +114,19 @@ body {
   width: 90%;
   margin: 0 auto;
 }
-.main-content-wrapper {
+.main-content-wrapper,
+.car-content-wrapper {
   max-width: 90rem;
   width: 90%;
   margin: 0 auto;
 }
 
+.car-content-wrapper {
+  display: flex;
+  justify-content: space-between;
+  flex-flow: wrap;
+  gap: 0.5rem;
+}
 .user-form {
   max-width: 40rem;
   width: 90%;

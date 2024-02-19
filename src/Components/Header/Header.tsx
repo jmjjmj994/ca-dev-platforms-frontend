@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import {  NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 type NavProps = {
   isActive: boolean;
@@ -14,7 +14,7 @@ const Header = () => {
 
   return (
     <header className="bg-light-grey">
-      <div className="header-content-wrapper  flex justify-between items-center   bg-orange-500 ">
+      <div className="header-content-wrapper  flex justify-between items-center   ">
         <span className="logo">ImperialInferno</span>
         <button onClick={handleActive} aria-label="open">
           <svg
@@ -50,7 +50,7 @@ const Nav = ({ isActive, handleActive }: NavProps) => {
   };
   return (
     <nav
-      className={`fixed right-0 top-0 w-full bg-primary h-full ${
+      className={`fixed right-0 top-0 w-full bg-light-grey h-full ${
         isActive
           ? 'translate-x-0 transition-all'
           : 'translate-x-full transition-all'
@@ -81,11 +81,9 @@ const Nav = ({ isActive, handleActive }: NavProps) => {
             <NavLink to="/">Home</NavLink>
           </li>
           <li className="mt-5 text-xl">
-            <NavLink to="/">Cars</NavLink>
+            <NavLink to="/cars">Cars</NavLink>
           </li>
-          <li className="mt-5 text-xl">
-            <NavLink to="/">Account</NavLink>
-          </li>
+
           <li className="mt-5 text-xl">
             <NavLink to="/">Documentation</NavLink>
           </li>
